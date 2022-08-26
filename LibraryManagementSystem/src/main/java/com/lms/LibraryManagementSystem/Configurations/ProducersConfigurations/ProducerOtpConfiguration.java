@@ -32,7 +32,7 @@ public class ProducerOtpConfiguration {
         return new TopicExchange(exchange);
     }
 
-    @Bean
+    @Bean("otp-queue-binding")
     public Binding binding() {
         return BindingBuilder
                 .bind(queue())
@@ -40,7 +40,6 @@ public class ProducerOtpConfiguration {
                 .with(routingKey);
     }
 
-    @Bean("otp-queue-binding")
     public MessageConverter converter() {
         return new Jackson2JsonMessageConverter();
 

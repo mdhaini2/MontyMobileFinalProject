@@ -1,5 +1,7 @@
 package com.lms.LibraryManagementSystem.Utils;
 
+import org.springframework.http.HttpStatus;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -17,6 +19,12 @@ public class Response {
         this.status = status;
         this.message = message;
         setTime(timeStamp);
+        Data = data;
+    }
+    public Response(String message, Object data) {
+        this.status = HttpStatus.OK.value();
+        this.message = message;
+        setTime(System.currentTimeMillis());
         Data = data;
     }
 

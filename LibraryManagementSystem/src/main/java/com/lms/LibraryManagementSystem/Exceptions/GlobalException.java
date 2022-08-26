@@ -21,25 +21,52 @@ public class GlobalException {
         errorObject.setTime(System.currentTimeMillis());
         return new ResponseEntity<ResponseError>(errorObject, HttpStatus.BAD_REQUEST);
 
-    }   @ExceptionHandler
+    }
+
+    @ExceptionHandler
     public ResponseEntity<ResponseError> handleNumberParseException(NumberParseException exception) {
         ResponseError errorObject = new ResponseError();
         errorObject.setStatus(HttpStatus.BAD_REQUEST.value());
         errorObject.setMessage(exception.getMessage());
-        errorObject.setStackTrace(exception.getStackTrace());
-        errorObject.setTime(System.currentTimeMillis());
-        return new ResponseEntity<ResponseError>(errorObject, HttpStatus.BAD_REQUEST);
-
-    }  @ExceptionHandler
-    public ResponseEntity<ResponseError> handleSQLException(SQLException exception) {
-        ResponseError errorObject = new ResponseError();
-        errorObject.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        errorObject.setMessage(exception.getMessage());
-        errorObject.setStackTrace(exception.getStackTrace());
         errorObject.setTime(System.currentTimeMillis());
         return new ResponseEntity<ResponseError>(errorObject, HttpStatus.BAD_REQUEST);
 
     }
 
+    @ExceptionHandler
+    public ResponseEntity<ResponseError> handleSQLException(SQLException exception) {
+        ResponseError errorObject = new ResponseError();
+        errorObject.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        errorObject.setMessage(exception.getMessage());
+        errorObject.setTime(System.currentTimeMillis());
+        return new ResponseEntity<ResponseError>(errorObject, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }   @ExceptionHandler
+    public ResponseEntity<ResponseError> handleBooksNotFoundException(BooksNotFoundException exception) {
+        ResponseError errorObject = new ResponseError();
+        errorObject.setStatus(HttpStatus.NOT_FOUND.value());
+        errorObject.setMessage(exception.getMessage());
+        errorObject.setTime(System.currentTimeMillis());
+        return new ResponseEntity<ResponseError>(errorObject, HttpStatus.NOT_FOUND);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ResponseError> handelCredentialsNotValidException(CredentialsNotValidException exception) {
+        ResponseError errorObject = new ResponseError();
+        errorObject.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorObject.setMessage(exception.getMessage());
+        errorObject.setTime(System.currentTimeMillis());
+        return new ResponseEntity<ResponseError>(errorObject, HttpStatus.BAD_REQUEST);
+
+    } @ExceptionHandler
+    public ResponseEntity<ResponseError> handleUserAlreadyReservedBookException(UserAlreadyReservedBookException exception) {
+        ResponseError errorObject = new ResponseError();
+        errorObject.setStatus(HttpStatus.CONFLICT.value());
+        errorObject.setMessage(exception.getMessage());
+        errorObject.setTime(System.currentTimeMillis());
+        return new ResponseEntity<ResponseError>(errorObject, HttpStatus.CONFLICT);
+
+    }
 
 }

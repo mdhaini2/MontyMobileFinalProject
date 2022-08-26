@@ -2,6 +2,7 @@ package com.lms.LibraryManagementSystem.Producers;
 
 
 import com.lms.LibraryManagementSystem.Entities.OTP;
+import com.lms.LibraryManagementSystem.Repositories.OTPRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,14 @@ public class ProducerOTP {
 
     @Value("${otp.routing.key}")
     private String routingKey;
-
+    @Autowired
+    private OTPRepository otpRepository;
     @Autowired
     private AmqpTemplate amqpTemplate;
 
     public void sendJsonMessage(OTP otp) {
         log.info(String.format("Json message sent -> %s", otp));
+        otpRepository.save(otp);
         amqpTemplate.convertAndSend(exchange, routingKey, otp);
     }
 

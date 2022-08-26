@@ -1,7 +1,11 @@
 package com.lms.LibraryManagementSystem.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Users implements Serializable {
@@ -16,6 +20,11 @@ public class Users implements Serializable {
     private String password;
     private int isRegistered;
 
+    private double returnAvg;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<UserReserveBook> userReservedBooks  = new HashSet<UserReserveBook>();
 
     public Users() {
     }
@@ -74,5 +83,21 @@ public class Users implements Serializable {
 
     public void setIsRegistered(int isRegistered) {
         this.isRegistered = isRegistered;
+    }
+
+    public Set<UserReserveBook> getUserReservedBooks() {
+        return userReservedBooks;
+    }
+
+    public void setUserReservedBooks(Set<UserReserveBook> userReservedBooks) {
+        this.userReservedBooks = userReservedBooks;
+    }
+
+    public double getReturnAvg() {
+        return returnAvg;
+    }
+
+    public void setReturnAvg(double returnAvg) {
+        this.returnAvg = returnAvg;
     }
 }
