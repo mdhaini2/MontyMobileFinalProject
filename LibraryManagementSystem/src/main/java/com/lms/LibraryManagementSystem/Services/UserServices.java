@@ -43,7 +43,7 @@ public class UserServices {
     private int countryCode;
 
 
-    public Object registerUser(Users user) throws NumberParseException, PhoneNumberInvalidException {
+    public Response registerUser(Users user) throws NumberParseException, PhoneNumberInvalidException {
         // Phone number validator
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         String userPhoneNumber = String.valueOf(user.getPhoneNumber());
@@ -94,7 +94,7 @@ public class UserServices {
         return number;
     }
 
-    public Object loginUser(String inputPhoneNumber, String password) throws PhoneNumberInvalidException, NumberParseException, CredentialsNotValidException {
+    public Response loginUser(String inputPhoneNumber, String password) throws PhoneNumberInvalidException, NumberParseException, CredentialsNotValidException {
         // Phone number validator
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         String userPhoneNumber = String.valueOf(inputPhoneNumber);

@@ -8,6 +8,7 @@ import com.lms.LibraryManagementSystem.Exceptions.PhoneNumberInvalidException;
 import com.lms.LibraryManagementSystem.Exceptions.UserAlreadyReservedBookException;
 import com.lms.LibraryManagementSystem.Services.BooksServices;
 import com.lms.LibraryManagementSystem.Services.UserServices;
+import com.lms.LibraryManagementSystem.Utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,25 +22,25 @@ public class BooksController {
     private BooksServices booksServices;
 
     @PostMapping(value = "/addBook")
-    public Object registerUser(@RequestBody Book book) {
+    public Response registerUser(@RequestBody Book book) {
         return booksServices.addBook(book);
     }
 
     @GetMapping(value = "/getBooksByName")
-        public Object getBooksByName(@RequestParam String bookName) throws BooksNotFoundException {
+        public Response getBooksByName(@RequestParam String bookName) throws BooksNotFoundException {
         return booksServices.getBooksByName(bookName);
     }
 
     @PostMapping(value = "/reserveBook")
-    public Object reserveBook(@RequestParam int bookId) throws UserAlreadyReservedBookException, BooksNotFoundException {
+    public Response reserveBook(@RequestParam int bookId) throws UserAlreadyReservedBookException, BooksNotFoundException {
         return booksServices.reserveBook(bookId);
     }
     @GetMapping(value = "/getBookByAuthor")
-    public Object getBookByAuthor(@RequestParam String author) throws BooksNotFoundException {
+    public Response getBookByAuthor(@RequestParam String author) throws BooksNotFoundException {
         return booksServices.getBookByAuthor(author);
     }
     @GetMapping(value = "/returnBook")
-    public Object returnBook(@RequestParam int bookId) throws BooksNotFoundException {
+    public Response returnBook(@RequestParam int bookId) throws BooksNotFoundException {
         return booksServices.returnBook(bookId);
     }
 }
